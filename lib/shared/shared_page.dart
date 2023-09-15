@@ -27,9 +27,13 @@ class SharedPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-          padding: const EdgeInsets.all(10.0),
-          physics: const BouncingScrollPhysics(),
-          child: SharedText(text: message, fontSize: 18.0)),
+        padding: const EdgeInsets.all(10.0),
+        physics: const BouncingScrollPhysics(),
+        child: SharedText(
+          text: message,
+          fontSize: 18.0,
+        ),
+      ),
     );
   }
 }

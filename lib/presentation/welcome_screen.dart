@@ -1,11 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:note_app/services/auth_methods.dart';
 import 'package:note_app/shared/shared_button.dart';
 import 'package:note_app/shared/shared_colors.dart';
 import 'package:note_app/shared/shared_text.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
-
+  WelcomeScreen({super.key});
+  final AuthMethods _authMethods = AuthMethods();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +39,19 @@ class WelcomeScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: SharedButton(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/home');
+                    onTap: () async {
+                      bool result =
+                          await _authMethods.signInWithGoogle(context);
+                      if (result) {
+                        Navigator.of(context).pushNamed('/home');
+                      }
                     },
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SharedText(
-                          text: 'Get Started',
+                          text: 'Let`s Get Started',
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                           color: SharedColors.whiteColor,
